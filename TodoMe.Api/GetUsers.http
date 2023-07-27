@@ -1,0 +1,15 @@
+### Get All Users
+GET http://localhost:5000/users
+
+### Get user by id
+GET http://localhost:5000/users/bigchief69
+
+### Add new user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "id": "bigchief69",
+  "name": "Chad"
+}
+

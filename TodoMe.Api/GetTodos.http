@@ -1,0 +1,19 @@
+### Get All Todos
+GET http://localhost:5000/todos
+Authorization: bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yU3l5bTBMeWJza1c3UE44MFVWYU9vS05KazMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJodHRwczovL2FwaS50b2RvbWUuY29tIiwiZW1haWwiOiJjb3JieW4uYWx0bWFuMDFAZ21haWwuY29tIiwiZXhwIjoxNjkwMTc0OTAxLCJpYXQiOjE2OTAxNzQ4NDEsImltYWdlIjoiaHR0cHM6Ly9pbWcuY2xlcmsuY29tL2V5SjBlWEJsSWpvaWNISnZlSGtpTENKemNtTWlPaUpvZEhSd2N6b3ZMMmx0WVdkbGN5NWpiR1Z5YXk1a1pYWXZiMkYxZEdoZloyOXZaMnhsTDJsdFoxOHlVM294UkhvMVl6ZGpUMHRZY0RsaVF6VlFVWEk1TjNkUVRsb3VjRzVuSW4wIiwiaXNzIjoiaHR0cHM6Ly91bmJpYXNlZC13YWhvby05Ny5jbGVyay5hY2NvdW50cy5kZXYiLCJqdGkiOiJlZDljMjQ5OTAzNDk3MTc3OTczYSIsIm5hbWUiOiJDb3JieW4iLCJuYmYiOjE2OTAxNzQ4MzYsInN1YiI6InVzZXJfMlN6MURxUGlBQzY5OUlxdlJqbG01MVhoVVpUIn0.a637jOfQWqgjcGwxyzwXMn0vPNLAPcCkm4cjwUMz5iXjuXvYupjoTWJ0Y05r5sp8BtFpUKH63-g-9qGtgw4sjGbfEE5BB_cFZPN_wVxWT_bdUGeBtJlmUjiRLEVJnLPTM5qiCP_LOmDPlKiF8kK6WtLG7SVC2MGKIRI9ZBy_GxYBraHICMSPlkEoQM7Au__QX5R5VIlRrpPzEmh5tyIhq4dogz2TAZZgrKaKvBZaF-krL3AQq6O37ryarTWnc0oD1Rq-4ewU3WJvkW5oBEgWjoLYx49HUc01TeyxbEniwHppFk9CkUr6KZnj8slTTKRKBZX7ktFieKNYsC_2doFj8A
+
+### Get Single Todo
+GET http://localhost:5000/todos/48
+
+### Create Todo
+POST http://localhost:5000/todos
+Content-Type: application/json
+
+{
+  "id": 4,
+  "title": "Do More Stuff",
+  "isComplete": false
+}
+
+### Delete Todo
+DELETE http://localhost:5000/todos/4
