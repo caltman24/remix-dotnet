@@ -12,7 +12,11 @@ import stylesheet from "~/tailwind.css"
 
 import { rootAuthLoader } from "@clerk/remix/ssr.server"
 import { ClerkApp } from "@clerk/remix/dist/client/ClerkApp";
-import { SignedIn, SignedOut, V2_ClerkErrorBoundary, SignOutButton, UserButton } from "@clerk/remix";
+import { SignedIn, SignedOut, V2_ClerkErrorBoundary, UserButton } from "@clerk/remix";
+
+export const DefaultJwtTemplate = {
+  template: "TodoMe"
+} as const
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet }
@@ -31,7 +35,7 @@ export function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-slate-100">
         <header className="mb-5">
           <nav className="max-w-[1400px] m-auto flex gap-8 items-center justify-between px-2 py-3">
             <Link prefetch="render" to="/">

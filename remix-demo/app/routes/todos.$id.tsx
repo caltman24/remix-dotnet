@@ -1,16 +1,18 @@
 
 import { getAuth } from "@clerk/remix/ssr.server";
-import { ActionArgs, LoaderArgs, json, redirect } from "@remix-run/node";
+import { LoaderArgs, json } from "@remix-run/node";
 import { Form, Link, isRouteErrorResponse, useLoaderData, useNavigation, useRouteError } from "@remix-run/react";
 import TodoApiService from "apiService";
-import { useState } from "react";
+import { DefaultJwtTemplate } from "~/root";
 
 
 export async function loader(args: LoaderArgs) {
     const { getToken } = await getAuth(args);
-    const token = await getToken({ template: "TodoMe" });
+
+    const token = await getToken(DefaultJwtTemplate);
 
     const todo = await TodoApiService.getById(parseInt(args.params.id!), token!);
+
 
     if (!todo) throw new Response("Todo Not Found", { status: 404 })
 

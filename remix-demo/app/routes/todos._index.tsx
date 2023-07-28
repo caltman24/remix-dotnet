@@ -4,6 +4,7 @@ import { Form, useNavigation } from "@remix-run/react";
 import TodoApiService from "apiService";
 import { ElementRef, useEffect, useRef } from "react";
 import { TodoModel } from "todoService";
+import { DefaultJwtTemplate } from "~/root";
 
 type TodoFormModel = Pick<TodoModel, "title">
 
@@ -31,7 +32,7 @@ export async function action(args: ActionArgs) {
 
     const { getToken } = await getAuth(args)
 
-    const token = await getToken({ template: "TodoMe" });
+    const token = await getToken(DefaultJwtTemplate);
 
     await TodoApiService.add(newTodo, token!);
 
@@ -41,7 +42,7 @@ export async function action(args: ActionArgs) {
 export default function TodosApiIndexRoute() {
     const navigation = useNavigation();
     const isAdding = navigation.state === "submitting"
-        && navigation.formMethod === "post"
+        && navigation.formMethod === "POST"
 
     const formRef = useRef<ElementRef<"form">>(null);
 
@@ -60,8 +61,8 @@ export default function TodosApiIndexRoute() {
                     <div className="flex flex-col gap-2">
                         <label>Title: </label>
                         <div className="flex gap-2">
-                            <input type="text" name="title" className="bg-slate-200 rounded-lg px-4 py-1" minLength={1} maxLength={50} required />
-                            <button type="submit" className="button px-4 py-1 bg-cyan-300 transition-[background] hover:transition-[background] hover:bg-cyan-200 active:bg-cyan-400 active:transition-[background] rounded-lg">
+                            <input type="text" name="title" className="bg-slate-200 shadow-md rounded-lg px-4 py-1" minLength={1} maxLength={50} required />
+                            <button type="submit" className="button px-4 py-1 bg-cyan-500 transition-[background] hover:transition-[background] hover:bg-cyan-400 active:bg-cyan-700 active:transition-[background] text-slate-100 rounded-lg">
                                 Add
                             </button>
                         </div>

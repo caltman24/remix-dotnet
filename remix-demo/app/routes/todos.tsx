@@ -3,6 +3,7 @@ import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
 import { Link, Outlet, isRouteErrorResponse, useLoaderData, useNavigation, useRouteError } from "@remix-run/react";
 import TodoApiService from "apiService";
 import { TodoModel } from '../../todoService';
+import { DefaultJwtTemplate } from "~/root";
 
 
 const pageTitle = <h1 className="font-bold text-3xl mb-7">Todos from .NET API</h1>
@@ -12,7 +13,7 @@ export async function loader(args: LoaderArgs) {
 
     if (!userId) return redirect("/login")
 
-    const token = await getToken({ template: "TodoMe" });
+    const token = await getToken(DefaultJwtTemplate);
 
     return await TodoApiService.getAll(token!);
 }
@@ -23,7 +24,7 @@ export async function action(args: ActionArgs) {
 
     const { getToken } = await getAuth(args);
 
-    const token = await getToken({ template: "TodoMe" });
+    const token = await getToken(DefaultJwtTemplate);
 
     await TodoApiService.delete(parseInt(id?.toString()!), token!)
 
@@ -67,7 +68,7 @@ export default function TodosApiRootRoute() {
                 {todos.map(t => (
                     <li key={t.id}>
                         <Link prefetch="viewport" to={`/todos/${t.id}`}>
-                            <div className={`${t.isComplete ? "bg-rose-200" : "bg-slate-100 hover:bg-cyan-100 active:bg-slate-200 transition-[background] hover:transition-[background] active:transition-[background]"} py-2 px-6 rounded-lg`}>
+                            <div className={`${t.isComplete ? "bg-rose-200" : "bg-slate-200 hover:bg-cyan-100 active:bg-slate-200 transition-[background] hover:transition-[background] active:transition-[background]"} py-2 px-6 rounded-lg shadow-md`}>
                                 <p className="font-medium">{t.title}</p>
                             </div>
                         </Link>
