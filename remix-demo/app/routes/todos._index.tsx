@@ -2,7 +2,7 @@ import { getAuth } from "@clerk/remix/ssr.server";
 import { ActionArgs } from "@remix-run/node";
 import { Form, useNavigation } from "@remix-run/react";
 import TodoApiService from "apiService";
-import { useEffect, useRef } from "react";
+import { ElementRef, useEffect, useRef } from "react";
 import { TodoModel } from "todoService";
 
 type TodoFormModel = Pick<TodoModel, "title">
@@ -24,7 +24,7 @@ export async function action(args: ActionArgs) {
     const formData = serializeForm<TodoFormModel>(form);
 
     const newTodo: TodoModel = {
-        id: 0,
+        id: 0, // id is auto incremented in db
         title: formData.title!,
         isComplete: false
     }
@@ -43,7 +43,7 @@ export default function TodosApiIndexRoute() {
     const isAdding = navigation.state === "submitting"
         && navigation.formMethod === "post"
 
-    const formRef = useRef<HTMLFormElement>(null);
+    const formRef = useRef<ElementRef<"form">>(null);
 
     // FIXME: NOT WOKRING!
     useEffect(() => {

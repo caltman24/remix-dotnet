@@ -10,14 +10,11 @@ const pageTitle = <h1 className="font-bold text-3xl mb-7">Todos from .NET API</h
 export async function loader(args: LoaderArgs) {
     const { userId, getToken } = await getAuth(args);
 
-    if (!userId) {
-        return redirect("/login")
-    }
+    if (!userId) return redirect("/login")
 
     const token = await getToken({ template: "TodoMe" });
 
     return await TodoApiService.getAll(token!);
-
 }
 
 export async function action(args: ActionArgs) {
@@ -25,6 +22,7 @@ export async function action(args: ActionArgs) {
     const id = formData.get("id");
 
     const { getToken } = await getAuth(args);
+
     const token = await getToken({ template: "TodoMe" });
 
     await TodoApiService.delete(parseInt(id?.toString()!), token!)

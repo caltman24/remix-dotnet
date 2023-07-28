@@ -5,21 +5,20 @@ import { LoaderArgs, redirect } from "@remix-run/node";
 export async function loader(args: LoaderArgs) {
     const { userId, getToken } = await getAuth(args);
 
-    if (userId) {
-        const token = await getToken({ template: "TodoMe" });
+    if (!userId) return null
 
-        // send request to add user to database 
-        await fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-                "Authorization": `bearer ${token}`
-            }
-        })
+    const token = await getToken({ template: "TodoMe" });
 
-        return redirect("/todos")
+    // send request to add user to database 
+    await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+            "Authorization": `bearer ${token}`
+        }
+    })
 
-    }
-    return null
+    return redirect("/todos")
+
 }
 
 export default function SignInPage() {
